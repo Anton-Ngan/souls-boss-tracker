@@ -1,0 +1,91 @@
+[
+  {
+    "name": "Elden Ring",
+    "slug": "elden-ring",
+    "coverImage": "/images/elden-ring.jpg",
+    "bosses": [
+      { "name": "Margit, the Fell Omen", "area": "Stormhill", "lore": "A powerful demigod guarding the path to Stormveil Castle. He wields a magical hammer and swift blade techniques." },
+      { "name": "Godrick the Grafted", "area": "Stormveil Castle", "lore": "A demigod who grafts the limbs of fallen warriors onto his own body, seeking power he was never born with." },
+      { "name": "Red Wolf of Radagon", "area": "Raya Lucaria Academy", "lore": "A magical construct serving as guardian of the academy, wielding sorcery and devastating physical attacks." },
+      { "name": "Rennala, Queen of the Full Moon", "area": "Raya Lucaria Academy", "lore": "Former head of the academy and wielder of the Full Moon sorcery, now a broken figure clutching her amber egg." },
+      { "name": "Starscourge Radahn", "area": "Caelid", "lore": "One of the greatest demigods, a warrior who held the stars in place through gravitational sorcery." },
+      { "name": "Rykard, Lord of Blasphemy", "area": "Mt. Gelmir", "lore": "A demigod who fed himself to a serpent god, merging with it to gain immortality at the cost of his humanity." },
+      { "name": "Morgott, the Omen King", "area": "Leyndell, Royal Capital", "lore": "The true identity of Margit — an Omen cursed with thorns who locked himself away to protect the Erdtree." },
+      { "name": "Fire Giant", "area": "Mountaintops of the Giants", "lore": "The last of a race of giants, kept alive by the Greater Will to guard the Forge of the Giants." },
+      { "name": "Godskin Duo", "area": "Crumbling Farum Azula", "lore": "Two members of the Godskin Apostles working in tandem — Noble and Apostle — servants of the Black Blade Kindred." },
+      { "name": "Maliketh, the Black Blade", "area": "Crumbling Farum Azula", "lore": "Destined death incarnate, the Black Blade Kindred and shadow of Queen Marika." },
+      { "name": "Hoarah Loux, Warrior", "area": "Leyndell, Ashen Capital", "lore": "The true form of Godfrey, First Elden Lord — a savage chieftain before he was graced by the Erdtree." },
+      { "name": "Elden Beast", "area": "Leyndell, Ashen Capital", "lore": "The vessel of the Elden Ring itself, an outer god that descended from the Erdtree to face the Tarnished." },
+      { "name": "Malenia, Blade of Miquella", "area": "Haligtree", "lore": "Universally regarded as the hardest boss in Elden Ring. She has never known defeat, and every hit she lands heals her." },
+      { "name": "Mohg, Lord of Blood", "area": "Mohgwyn Palace", "lore": "An Omen demigod who consorts with the Formless Mother, dreaming of a dynasty built on rivers of blood." },
+      { "name": "Astel, Naturalborn of the Void", "area": "Lake of Rot", "lore": "A creature that fell from the stars and obliterated an entire civilisation. It can clone itself and explode stars." }
+    ]
+  },
+  {
+    "name": "Dark Souls 3",
+    "slug": "dark-souls-3",
+    "coverImage": "/images/dark-souls-3.jpg",
+    "bosses": [
+      { "name": "Iudex Gundyr", "area": "Cemetery of Ash", "lore": "A Champion who failed his duty and was impaled with a coiled sword, waiting for the Ashen One to rekindle the flame." },
+      { "name": "Vordt of the Boreal Valley", "area": "High Wall of Lothric", "lore": "A former knight of the Pontiff turned beast, corrupted by the Sulyvahn's eyes and now serving as a mindless guardian." },
+      { "name": "Crystal Sage", "area": "Road of Sacrifices", "lore": "A master sorcerer of the Grand Archives who can teleport and split into multiple illusions to confuse attackers." },
+      { "name": "Deacons of the Deep", "area": "Cathedral of the Deep", "lore": "A congregation of clerics who collectively wield a great soul, protecting Aldrich's coffin in the cathedral." },
+      { "name": "Abyss Watchers", "area": "Farron Keep", "lore": "An order of warriors who hunted the abyss, but one was infected — now they fight each other endlessly." },
+      { "name": "High Lord Wolnir", "area": "Catacombs of Carthus", "lore": "Once a conquering king who feared death above all, he sought the abyss seeking immortality and was consumed by it." },
+      { "name": "Old Demon King", "area": "Smouldering Lake", "lore": "The last of the chaos demons, a decrepit king smouldering with dying embers, a relic of the Age of Fire." },
+      { "name": "Pontiff Sulyvahn", "area": "Irithyll of the Boreal Valley", "lore": "A sorcerer-king who enslaved Aldrich and Yhorm, and whose magical eyes grant visions of the Profaned Capital." },
+      { "name": "Yhorm the Giant", "area": "Profaned Capital", "lore": "A giant king who took the Profaned Flame to end the suffering of his people. His shield is the tomb of their tragedies." },
+      { "name": "Aldrich, Devourer of Gods", "area": "Anor Londo", "lore": "A cleric who dreamed of feasting on men and gods alike, eventually consuming the God of the Sun, Gwyndolin." },
+      { "name": "Dancer of the Boreal Valley", "area": "High Wall of Lothric", "lore": "A former human knight cursed by Sulyvahn and transformed into a graceful but deadly dancer of ash and frost." },
+      { "name": "Dragonslayer Armour", "area": "Lothric Castle", "lore": "The animated armour of a legendary dragonslayer, now empty of its wearer but still driven to protect the path ahead." },
+      { "name": "Oceiros, the Consumed King", "area": "Consumed King's Garden", "lore": "The king of Lothric who became obsessed with dragons, eventually transforming into a dragon himself." },
+      { "name": "Champion Gundyr", "area": "Untended Graves", "lore": "Iudex Gundyr in a dark timeline where the fire was never linked — a relentless fighter driven by pure instinct." },
+      { "name": "Twin Princes", "area": "Grand Archives", "lore": "Lorian and Lothric — the elder brothers the younger, who refuses to link the flame. Two souls fighting as one body." },
+      { "name": "Soul of Cinder", "area": "Kiln of the First Flame", "lore": "The amalgamation of every Lord of Cinder who ever linked the First Flame — the final guardian of the Age of Fire." },
+      { "name": "Sister Friede", "area": "Painted World of Ariandel", "lore": "A former Sable Church member who abandoned everything to protect a painted world, fighting alongside Father Ariandel." },
+      { "name": "Slave Knight Gael", "area": "The Dreg Heap", "lore": "A slave knight sent to find the Dark Soul of Humanity for his Lady. He consumed every last dark soul he could find." }
+    ]
+  },
+  {
+    "name": "Bloodborne",
+    "slug": "bloodborne",
+    "coverImage": "/images/bloodborne.jpg",
+    "bosses": [
+      { "name": "Cleric Beast", "area": "Great Bridge", "lore": "A clergyman transformed into a towering beast by the scourge of beasts — the first true horror the Hunter encounters." },
+      { "name": "Father Gascoigne", "area": "Central Yharnam", "lore": "A hunter who succumbed to the scourge mid-hunt. His music box, a gift from his daughter, is the only thing that slows him." },
+      { "name": "Blood-Starved Beast", "area": "Old Yharnam", "lore": "A beast maddened by the old blood, naked and frenzied, haunting the ruins of the forbidden district of Yharnam." },
+      { "name": "Vicar Amelia", "area": "Cathedral Ward", "lore": "The head Vicar of the Healing Church, transformed mid-prayer into a massive golden beast clutching a holy pendant." },
+      { "name": "Shadow of Yharnam", "area": "Forbidden Woods", "lore": "Three shadow figures who act as guardians of Byrgenwerth, wielding katanas, candles, and serpent sorcery in concert." },
+      { "name": "Darkbeast Paarl", "area": "Hypogean Gaol", "lore": "An ancient beast crackling with lightning, so old that its flesh has rotted away leaving only a skeleton of electricity." },
+      { "name": "The Witch of Hemwick", "area": "Hemwick Charnel Lane", "lore": "Twin witches who summon Mad Ones to swarm and distract the Hunter while they remain invisible." },
+      { "name": "Rom, the Vacuous Spider", "area": "Moonside Lake", "lore": "A former student of Byrgenwerth, transformed into a spider. Killing her lifts the veil hiding the Great Ones' presence." },
+      { "name": "The One Reborn", "area": "Yahar'gul, Unseen Village", "lore": "A horrific congregation of corpses fused into one massive body, reborn again and again through ritual incantation." },
+      { "name": "Micolash, Host of the Nightmare", "area": "Nightmare of Mensis", "lore": "A scholar who willingly trapped himself in the Hunter's Nightmare to commune with Kos through arcane rituals." },
+      { "name": "Mergo's Wet Nurse", "area": "Nightmare of Mensis", "lore": "A mysterious Great One who tends to Mergo, a child of the Pthumerian queen. It wields multiple spectral blades." },
+      { "name": "Gehrman, the First Hunter", "area": "Hunter's Dream", "lore": "The founder of the workshop and master of all hunters, who serves the Moon Presence and guards the Hunter's Dream." },
+      { "name": "Moon Presence", "area": "Hunter's Dream", "lore": "A Great One who formed a contract with Gehrman, feeding on human insight and trapping hunters in the dream." },
+      { "name": "Ludwig, the Holy Blade", "area": "Hunter's Nightmare", "lore": "The first hunter of the Healing Church, transformed into a monstrous steed, who reclaims his humanity mid-fight." },
+      { "name": "Lady Maria of the Astral Clocktower", "area": "Astral Clocktower", "lore": "A descendant of Queen Yharnam and the finest student of Gehrman, who sealed herself away out of guilt." }
+    ]
+  },
+  {
+    "name": "Sekiro: Shadows Die Twice",
+    "slug": "sekiro",
+    "coverImage": "/images/sekiro.jpg",
+    "bosses": [
+      { "name": "Gyoubu Masataka Oniwa", "area": "Ashina Outskirts", "lore": "A fearsome general on horseback who charges with his enormous spear, roaring war cries across the battlefield." },
+      { "name": "Lady Butterfly", "area": "Hirata Estate", "lore": "An aged shinobi master who trained Wolf as a child, now testing him with illusions and phantom butterflies." },
+      { "name": "Genichiro Ashina", "area": "Ashina Castle", "lore": "The grandson of the sword saint, desperately fighting to save Ashina from collapse — by any means necessary." },
+      { "name": "Guardian Ape", "area": "Sunken Valley", "lore": "A massive ape protecting a Lotus of the Palace. Even beheading it is not enough — it rises again headless, wielding its own skull." },
+      { "name": "Headless Ape", "area": "Ashina Depths", "lore": "The Guardian Ape reunited with its mate, fighting as a pair in one of the game's most chaotic duo encounters." },
+      { "name": "Folding Screen Monkeys", "area": "Senpou Temple", "lore": "Four divine monkeys that must be caught through stealth in an illusory realm — hear no evil, see no evil, speak no evil, and death." },
+      { "name": "Great Shinobi Owl", "area": "Ashina Castle", "lore": "Wolf's adoptive father and the master shinobi who trained him — a ruthless pragmatist who puts mission above all." },
+      { "name": "Emma, the Gentle Blade", "area": "Ashina Castle", "lore": "The doctor who healed Wolf and a surrogate daughter to Isshin — she fights only to stop those who would abuse the Dragon's Heritage." },
+      { "name": "Isshin Ashina", "area": "Ashina Castle", "lore": "The legendary founder of Ashina, summoned from death by Emma to stop Wolf from granting immortality to the Divine Heir." },
+      { "name": "Corrupted Monk", "area": "Fountainhead Palace", "lore": "A monk corrupted by the Fountainhead Waters, an illusion that splits into three phases before the true Monk is revealed." },
+      { "name": "Divine Dragon", "area": "Fountainhead Palace", "lore": "An ancient dragon from the Divine Realm, the source of the undying power the Dragon's Heritage draws from." },
+      { "name": "Demon of Hatred", "area": "Ashina Outskirts", "lore": "The lingering hatred of an Ashina general transformed by Shura's fire — a massive demon with sweeping fire attacks." },
+      { "name": "Sword Saint Isshin", "area": "Ashina Castle", "lore": "The true final boss: Genichiro's ultimate gambit summons the young Isshin at the peak of his power, wielding spear, sword, and lightning." }
+    ]
+  }
+]
