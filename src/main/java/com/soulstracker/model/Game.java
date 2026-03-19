@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "game")
@@ -28,4 +29,9 @@ public class Game {
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Boss> bosses = new ArrayList<>();
+
+    @Transient
+    public long getClearedCount() {
+        return bosses.stream().filter(Boss::isCleared).count();
+    }
 }
