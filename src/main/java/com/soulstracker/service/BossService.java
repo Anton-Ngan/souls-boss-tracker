@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,5 +49,26 @@ public class BossService {
 
     public List<BossAttempt> findAttemptsByBoss(Boss boss) {
         return bossAttemptRepository.findByBossOrderByAttemptedAtDesc(boss);
+    }
+
+    @Transactional
+    public void logDeath(Boss boss) {
+        BossAttempt attempt = new BossAttempt();
+        attempt.setBoss(boss);
+        attempt.setDied(true);
+        bossAttemptRepository.save(attempt);
+    }
+
+    @Transactional
+    public void toggleCleared(Boss boss) {
+        boss.setCleared(!boss.isCleared());
+        boss.setClearedAt(boss.isCleared() ? LocalDateTime.now() : null);
+        bossRepository.save(boss);
+    }
+
+    @Transactional
+    public void saveNotes(Boss boss, String notes) {
+        boss.setNotes(notes);
+        bossRepository.save(boss);
     }
 }

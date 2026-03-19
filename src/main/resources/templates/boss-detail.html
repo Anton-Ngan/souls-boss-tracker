@@ -65,10 +65,12 @@
             <div class="d-flex gap-2 mb-4">
                 <form th:action="@{/games/{slug}/bosses/{id}/attempt(slug=${game.slug},id=${boss.id})}"
                       method="post">
+                    <input type="hidden" name="source" value="detail">
                     <button type="submit" class="btn btn-danger">+ Log Death</button>
                 </form>
                 <form th:action="@{/games/{slug}/bosses/{id}/clear(slug=${game.slug},id=${boss.id})}"
                       method="post">
+                    <input type="hidden" name="source" value="detail">
                     <button type="submit"
                             th:class="${boss.cleared} ? 'btn btn-outline-secondary' : 'btn btn-success'"
                             th:text="${boss.cleared} ? 'Mark Not Cleared' : 'Mark Cleared'">Clear</button>

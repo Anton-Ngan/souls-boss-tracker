@@ -66,10 +66,12 @@
                     <div class="d-flex gap-2">
                         <form th:action="@{/games/{slug}/bosses/{id}/attempt(slug=${game.slug},id=${boss.id})}"
                               method="post" class="flex-grow-1">
+                            <input type="hidden" name="source" value="list">
                             <button type="submit" class="btn btn-danger btn-sm w-100">+ Death</button>
                         </form>
                         <form th:action="@{/games/{slug}/bosses/{id}/clear(slug=${game.slug},id=${boss.id})}"
                               method="post">
+                            <input type="hidden" name="source" value="list">
                             <button type="submit"
                                     th:class="${boss.cleared} ? 'btn btn-sm btn-outline-secondary' : 'btn btn-sm btn-outline-success'"
                                     th:text="${boss.cleared} ? '✗' : '✓'">✓</button>
