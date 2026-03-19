@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<head th:replace="~{layout :: head('Login')}"></head>
+<body class="d-flex align-items-center min-vh-100">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-8 col-md-5 col-lg-4">
+            <div class="text-center mb-4">
+                <h1 class="display-6 fw-bold text-warning">&#9876; Souls Tracker</h1>
+                <p class="text-muted">Track your deaths. Own your shame.</p>
+            </div>
+            <div class="card border-secondary shadow">
+                <div class="card-body p-4">
+                    <div th:if="${param.error}" class="alert alert-danger py-2 small">
+                        Invalid username or password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success py-2 small">
+                        You have been logged out.
+                    </div>
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username"
+                                   name="username" required autofocus autocomplete="username">
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password"
+                                   name="password" required autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100 fw-bold">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

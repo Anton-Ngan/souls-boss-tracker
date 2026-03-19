@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<head th:replace="~{layout :: head('Games')}"></head>
+<body>
+<nav th:replace="~{layout :: navbar}"></nav>
+
+<main class="container py-4">
+    <h1 class="mb-4">Select a Game</h1>
+
+    <div class="row g-4">
+        <div class="col-sm-6 col-lg-3" th:each="game : ${games}">
+            <a th:href="@{/games/{slug}(slug=${game.slug})}" class="text-decoration-none">
+                <div class="card h-100 border-secondary game-card">
+                    <div class="game-banner d-flex align-items-end p-3"
+                         th:classappend="'banner-' + ${game.slug}">
+                        <h5 class="card-title text-white mb-0 fw-bold shadow-sm"
+                            th:text="${game.name}">Game Name</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex gap-2 flex-wrap">
+                            <span class="badge bg-secondary"
+                                  th:text="${game.bosses.size()} + ' bosses'">0 bosses</span>
+                            <span class="badge bg-success"
+                                  th:text="${game.clearedCount} + ' cleared'">0 cleared</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
