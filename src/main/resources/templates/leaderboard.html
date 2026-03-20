@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<head th:replace="~{layout :: head('Leaderboard')}"></head>
+<body>
+<nav th:replace="~{layout :: navbar}"></nav>
+
+<main class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <div>
+            <h1 class="mb-0">Wall of Shame</h1>
+            <p class="text-muted small mb-0">All bosses ranked by death count</p>
+        </div>
+        <a th:href="@{/leaderboard/export}" class="btn btn-outline-secondary btn-sm">
+            &#8595; Export CSV
+        </a>
+    </div>
+
+    <div th:if="${rows.empty}" class="text-center py-5 text-muted">
+        No deaths logged yet. Go touch some bosses.
+    </div>
+
+    <div class="card border-secondary" th:unless="${rows.empty}">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="border-secondary">
+                    <tr>
+                        <th scope="col" class="text-muted small text-uppercase">#</th>
+
+                        <!--/* Boss name column */-->
+                        <th scope="col" class="text-muted small text-uppercase">
+                            <a th:href="@{/leaderboard(sort='name', dir=${sort == 'name' and dir == 'asc'} ? 'desc' : 'asc')}"
+                               class="text-decoration-none text-muted d-flex align-items-center gap-1">
+                                Boss
+                                <span th:if="${sort == 'name'}" th:text="${dir == 'asc'} ? '▲' : '▼'"></span>
+                            </a>
+                        </th>
+
+                        <!--/* Game column */-->
+                        <th scope="col" class="text-muted small text-uppercase">
+                            <a th:href="@{/leaderboard(sort='game', dir=${sort == 'game' and dir == 'asc'} ? 'desc' : 'asc')}"
+                               class="text-decoration-none text-muted d-flex align-items-center gap-1">
+                                Game
+                                <span th:if="${sort == 'game'}" th:text="${dir == 'asc'} ? '▲' : '▼'"></span>
+                            </a>
+                        </th>
+
+                        <!--/* Deaths column */-->
+                        <th scope="col" class="text-muted small text-uppercase">
+                            <a th:href="@{/leaderboard(sort='deaths', dir=${sort == 'deaths' and dir == 'asc'} ? 'desc' : 'asc')}"
+                               class="text-decoration-none text-muted d-flex align-items-center gap-1">
+                                Deaths
+                                <span th:if="${sort == 'deaths'}" th:text="${dir == 'asc'} ? '▲' : '▼'"></span>
+                            </a>
+                        </th>
+
+                        <!--/* Status column */-->
+                        <th scope="col" class="text-muted small text-uppercase">
+                            <a th:href="@{/leaderboard(sort='cleared', dir=${sort == 'cleared' and dir == 'asc'} ? 'desc' : 'asc')}"
+                               class="text-decoration-none text-muted d-flex align-items-center gap-1">
+                                Status
+                                <span th:if="${sort == 'cleared'}" th:text="${dir == 'asc'} ? '▲' : '▼'"></span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="row, stat : ${rows}">
+                        <td class="text-muted" th:text="${stat.index + 1}">1</td>
+                        <td>
+                            <a th:href="@{/games/{slug}/bosses/{id}(slug=${row.gameSlug}, id=${row.bossId})}"
+                               class="text-decoration-none text-light fw-semibold"
+                               th:text="${row.bossName}">Boss</a>
+                        </td>
+                        <td class="text-muted" th:text="${row.gameName}">Game</td>
+                        <td>
+                            <span class="fw-bold"
+                                  th:class="${row.deaths > 0} ? 'fw-bold text-danger' : 'fw-bold text-muted'"
+                                  th:text="${row.deaths}">0</span>
+                        </td>
+                        <td>
+                            <span th:if="${row.cleared}"    class="badge bg-success">Cleared</span>
+                            <span th:unless="${row.cleared}" class="badge bg-secondary">Remaining</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p class="text-muted small mt-2 text-end" th:unless="${rows.empty}"
+       th:text="${rows.size()} + ' bosses total'"></p>
+
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

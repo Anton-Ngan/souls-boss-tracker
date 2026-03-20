@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -80,6 +81,35 @@ public class StatsService {
         return bossAttemptRepository.findTop10ByOrderByAttemptedAtDesc();
     }
 
+    public List<LeaderboardRow> getLeaderboard(String sort, String dir) {
+        List<LeaderboardRow> rows = bossRepository.findAll().stream()
+                .map(b -> new LeaderboardRow(
+                        b.getName(),
+                        b.getGame().getName(),
+                        b.getGame().getSlug(),
+                        b.getId(),
+                        bossAttemptRepository.countByBossAndDiedTrue(b),
+                        b.isCleared(),
+                        b.getClearedAt()))
+                .toList();
+
+        Comparator<LeaderboardRow> comparator = switch (sort) {
+            case "name"    -> Comparator.comparing(LeaderboardRow::bossName, String.CASE_INSENSITIVE_ORDER);
+            case "game"    -> Comparator.comparing(LeaderboardRow::gameName, String.CASE_INSENSITIVE_ORDER);
+            case "cleared" -> Comparator.comparing(LeaderboardRow::cleared).reversed();
+            default        -> Comparator.comparingLong(LeaderboardRow::deaths).reversed();
+        };
+
+        if ("desc".equals(dir) && !sort.equals("deaths") && !sort.equals("cleared")) {
+            comparator = comparator.reversed();
+        }
+
+        return rows.stream().sorted(comparator).toList();
+    }
+
     public record BossDeathStat(String bossName, String gameName, long deaths) {}
     public record GameCompletionStat(String gameName, long cleared, int total) {}
+    public record LeaderboardRow(
+            String bossName, String gameName, String gameSlug, Long bossId,
+            long deaths, boolean cleared, LocalDateTime clearedAt) {}
 }
