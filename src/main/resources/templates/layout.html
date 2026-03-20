@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6">
 
-<!--/* Shared head fragment — usage: <head th:replace="~{layout :: head('Page Title')}"> */-->
+<!--/* Shared head fragment */-->
 <head th:fragment="head(pageTitle)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,9 +14,9 @@
 <body>
 
 <!--/* Navbar fragment */-->
-<nav class="navbar navbar-expand-lg border-bottom border-secondary" th:fragment="navbar">
+<nav class="navbar navbar-expand-lg" th:fragment="navbar">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" th:href="@{/dashboard}">&#9876; Souls Tracker</a>
+        <a class="navbar-brand" th:href="@{/dashboard}">Souls Tracker</a>
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,14 +40,6 @@
         </div>
     </div>
 </nav>
-
-<!--/* Footer fragment */-->
-<footer class="py-3 mt-5 border-top border-secondary text-center" th:fragment="footer">
-    <small class="text-muted">
-        Souls Tracker &mdash;
-        <a href="https://github.com" class="text-muted link-underline-opacity-25">GitHub</a>
-    </small>
-</footer>
 
 </body>
 </html>

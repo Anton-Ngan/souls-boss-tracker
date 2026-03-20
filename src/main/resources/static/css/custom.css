@@ -1,88 +1,453 @@
-/* ── Base ─────────────────────────────────────────────────── */
-body {
-    background-color: #0f0f0f;
-    min-height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* ── Bootstrap dark-theme variable overrides ────────────── */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #040200;
+    --bs-body-color: #d3c5a1;
+    --bs-card-bg: #0d0c0a;
+    --bs-border-color: #4a3a2a;
+    --bs-card-border-color: #4a3a2a;
+    --bs-secondary-color: #8a7a62;
+    --bs-table-bg: #0d0c0a;
+    --bs-table-hover-bg: #1a1500;
+    --bs-link-color: #c8a040;
+    --bs-link-hover-color: #f9c043;
+    --bs-breadcrumb-item-active-color: #8a7a62;
 }
 
-/* ── Navbar ───────────────────────────────────────────────── */
+/* ── Base ────────────────────────────────────────────────── */
+body {
+    font-family: 'EB Garamond', Georgia, serif;
+    background-color: #040200;
+    color: #d3c5a1;
+    min-height: 100vh;
+    font-size: 1.05rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 1.5px;
+    color: #d3c5a1;
+}
+
+a {
+    color: #c8a040;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f9c043;
+}
+
+/* ── Gold gradient text ──────────────────────────────────── */
+.gold-text {
+    background: linear-gradient(to bottom, #f9c043 0%, #bd6707 50%, #8a5010 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Page titles ─────────────────────────────────────────── */
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: linear-gradient(to bottom, #f9c043 0%, #bd6707 60%, #8a5010 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Section titles ──────────────────────────────────────── */
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8a7a62;
+    border-bottom: 1px solid #4a3a2a;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* ── Navbar ──────────────────────────────────────────────── */
 .navbar {
-    background-color: #1a1a1a !important;
+    background-color: #020100 !important;
+    border-bottom: 1px solid #4a3a2a !important;
 }
 
 .navbar-brand {
-    color: #c8a97e !important;
-    font-size: 1.25rem;
-    letter-spacing: 0.5px;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(to bottom, #f9c043 0%, #bd6707 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.navbar-brand:hover {
-    color: #e0c08a !important;
+.nav-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8a7a62 !important;
+    transition: color 0.2s;
 }
 
-/* ── Cards ────────────────────────────────────────────────── */
+.nav-link:hover,
+.nav-link.active {
+    color: #f9c043 !important;
+}
+
+.navbar-toggler {
+    border-color: #4a3a2a;
+}
+
+/* ── Cards ───────────────────────────────────────────────── */
 .card {
-    background-color: #1a1a1a;
+    background-color: #0d0c0a;
+    border-color: #4a3a2a;
 }
 
-/* ── Game cards ───────────────────────────────────────────── */
+/* ── Stat cards ──────────────────────────────────────────── */
+.stat-card {
+    background-color: #0d0c0a;
+    border: 1px solid #4a3a2a;
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.stat-number {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to bottom, #f9c043 0%, #bd6707 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8a7a62;
+    margin-top: 0.4rem;
+}
+
+/* ── Game cards ──────────────────────────────────────────── */
 .game-card {
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     overflow: hidden;
+    border-color: #4a3a2a;
 }
 
 .game-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-    border-color: #c8a97e !important;
+    box-shadow: 0 8px 28px rgba(200, 160, 60, 0.15);
+    border-color: #bd6707 !important;
 }
 
 .game-banner {
-    height: 140px;
-    background-color: #2a2a2a;
+    height: 180px;
+    background-color: #0d0c0a;
+    overflow: hidden;
+    position: relative;
 }
 
-.banner-elden-ring {
-    background: linear-gradient(135deg, #3d2b00 0%, #7a5500 100%);
+.game-cover-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
 }
 
-.banner-dark-souls-3 {
-    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 100%);
+.game-card:hover .game-cover-img {
+    opacity: 0.72;
 }
 
-.banner-bloodborne {
-    background: linear-gradient(135deg, #2d0000 0%, #5c1010 100%);
+.game-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(4,2,0,0.97) 0%, rgba(4,2,0,0.35) 55%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 0.9rem;
 }
 
-.banner-sekiro {
-    background: linear-gradient(135deg, #0a1a0a 0%, #1a3a1a 100%);
+.game-banner-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #f0ddb8;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+    line-height: 1.3;
 }
 
-/* ── Boss cards ───────────────────────────────────────────── */
+/* Gradient fallbacks if no image file */
+.banner-elden-ring    { background: linear-gradient(135deg, #3d2b00 0%, #7a5500 100%); }
+.banner-dark-souls-3  { background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 100%); }
+.banner-bloodborne    { background: linear-gradient(135deg, #2d0000 0%, #5c1010 100%); }
+.banner-sekiro        { background: linear-gradient(135deg, #0a1a0a 0%, #1a3a1a 100%); }
+.banner-dark-souls-1  { background: linear-gradient(135deg, #1a1000 0%, #3d2800 100%); }
+.banner-dark-souls-2  { background: linear-gradient(135deg, #0d1a1a 0%, #1a3535 100%); }
+
+/* ── Boss portrait ───────────────────────────────────────── */
+.boss-portrait {
+    height: 120px;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    overflow: hidden;
+}
+
+.boss-portrait-placeholder {
+    height: 120px;
+    background: linear-gradient(160deg, #0d0c0a 0%, #1a1500 60%, #0d0c0a 100%);
+    border-bottom: 1px solid #4a3a2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.boss-portrait-area {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #6a5a42;
+}
+
+/* ── Boss cards ──────────────────────────────────────────── */
 .boss-card {
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    border-color: #4a3a2a;
+    overflow: hidden;
 }
 
 .boss-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(200, 160, 60, 0.12);
+    border-color: #bd6707 !important;
 }
 
 .boss-card.cleared {
-    border-color: #198754 !important;
+    border-color: #1a5030 !important;
 }
 
-/* ── Forms ────────────────────────────────────────────────── */
+.boss-card.cleared:hover {
+    border-color: #2a8050 !important;
+}
+
+.boss-name-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+    color: #d3c5a1;
+}
+
+.boss-name-link:hover {
+    color: #f9c043;
+}
+
+.death-count {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #b04030;
+    line-height: 1;
+}
+
+/* ── Filter pills ────────────────────────────────────────── */
+.filter-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border: 1px solid #4a3a2a;
+    color: #8a7a62;
+    background: transparent;
+    transition: all 0.15s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #1a1500;
+    border-color: #bd6707;
+    color: #f9c043;
+}
+
+.filter-btn.active-cleared {
+    border-color: #1a6040;
+    color: #4ab870;
+}
+
+.filter-btn.active-remaining {
+    border-color: #7a2020;
+    color: #c05040;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.btn-danger {
+    background-color: #3a0c0c;
+    border-color: #7a2020;
+    color: #d3c5a1;
+}
+
+.btn-danger:hover {
+    background-color: #5a1414;
+    border-color: #a03030;
+    color: #f0ddb8;
+}
+
+.btn-success {
+    background-color: #0a2818;
+    border-color: #1a5535;
+    color: #d3c5a1;
+}
+
+.btn-success:hover {
+    background-color: #123520;
+    border-color: #2a7050;
+    color: #f0ddb8;
+}
+
+.btn-outline-secondary {
+    border-color: #4a3a2a;
+    color: #8a7a62;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #1a1500;
+    border-color: #8a7a62;
+    color: #d3c5a1;
+}
+
+.btn-outline-danger {
+    border-color: #7a2020;
+    color: #b05040;
+}
+
+.btn-outline-danger:hover {
+    background-color: #3a0c0c;
+    border-color: #a03030;
+    color: #d3c5a1;
+}
+
+.btn-outline-success {
+    border-color: #1a5535;
+    color: #4a9060;
+}
+
+.btn-outline-success:hover {
+    background-color: #0a2818;
+    color: #d3c5a1;
+}
+
+.btn-reset {
+    background-color: transparent;
+    border-color: #3a2a1a;
+    color: #6a5a42;
+    font-size: 0.62rem;
+}
+
+.btn-reset:hover {
+    background-color: #1a1500;
+    border-color: #6a5a42;
+    color: #d3c5a1;
+}
+
+/* ── Badges ──────────────────────────────────────────────── */
+.badge.bg-danger {
+    background-color: #4a1010 !important;
+    color: #c07060;
+}
+
+.badge.bg-success {
+    background-color: #0a2818 !important;
+    color: #4ab870;
+}
+
+.badge.bg-secondary {
+    background-color: #2a2010 !important;
+    color: #8a7a62;
+}
+
+/* ── List groups ─────────────────────────────────────────── */
+.list-group-item {
+    background-color: transparent;
+    border-color: #4a3a2a;
+    color: #d3c5a1;
+}
+
+/* ── Forms ───────────────────────────────────────────────── */
+.form-control {
+    background-color: #080600;
+    border-color: #4a3a2a;
+    color: #d3c5a1;
+}
+
 .form-control:focus {
-    border-color: #c8a97e;
-    box-shadow: 0 0 0 0.2rem rgba(200, 169, 126, 0.2);
+    background-color: #0d0c0a;
+    border-color: #bd6707;
+    color: #d3c5a1;
+    box-shadow: 0 0 0 0.15rem rgba(189, 103, 7, 0.2);
 }
 
-/* ── Breadcrumb ───────────────────────────────────────────── */
+.form-control::placeholder {
+    color: #4a3a2a;
+}
+
+/* ── Tables ──────────────────────────────────────────────── */
+.table-dark {
+    --bs-table-bg: #0d0c0a;
+    --bs-table-hover-bg: #1a1500;
+    --bs-table-border-color: #4a3a2a;
+    color: #d3c5a1;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────── */
+.breadcrumb {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+}
+
 .breadcrumb-item + .breadcrumb-item::before {
-    color: #555;
+    color: #4a3a2a;
 }
 
-/* ── Footer ───────────────────────────────────────────────── */
-footer {
-    background-color: #1a1a1a;
+/* ── Lore block ──────────────────────────────────────────── */
+.lore-text {
+    font-style: italic;
+    color: #a89878;
+    line-height: 1.7;
+    border-left: 2px solid #4a3a2a;
+    padding-left: 1rem;
+}
+
+/* ── Divider line ────────────────────────────────────────── */
+.gold-divider {
+    border: none;
+    border-top: 1px solid #4a3a2a;
+    margin: 1.5rem 0;
 }
