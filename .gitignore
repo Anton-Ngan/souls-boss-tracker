@@ -35,5 +35,4 @@ build/
 ### Project-specific ###
 .env
 *.env
-application-prod.properties
 .DS_Store
