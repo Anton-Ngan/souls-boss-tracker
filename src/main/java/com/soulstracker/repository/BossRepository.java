@@ -9,4 +9,5 @@ import java.util.List;
 public interface BossRepository extends JpaRepository<Boss, Long> {
     List<Boss> findByGame(Game game);
     List<Boss> findByGameOrderByNameAsc(Game game);
+    long countByClearedTrue();
 }
