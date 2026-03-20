@@ -64,4 +64,15 @@ public class BossController {
         bossService.saveNotes(boss, notes);
         return "redirect:/games/" + slug + "/bosses/" + id;
     }
+
+    @PostMapping("/games/{slug}/bosses/{id}/reset")
+    public String resetDeaths(@PathVariable String slug,
+                              @PathVariable Long id,
+                              @RequestParam(defaultValue = "list") String source) {
+        var boss = bossService.findBossById(id);
+        bossService.resetDeaths(boss);
+        return "detail".equals(source)
+                ? "redirect:/games/" + slug + "/bosses/" + id
+                : "redirect:/games/" + slug;
+    }
 }

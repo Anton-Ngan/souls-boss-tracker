@@ -4,69 +4,81 @@
 <body>
 <nav th:replace="~{layout :: navbar}"></nav>
 
-<main class="container py-4">
+<main class="container py-5">
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mb-3">
+    <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/games}" class="text-warning">Games</a>
+                <a th:href="@{/games}">Games</a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/games/{slug}(slug=${game.slug})}"
-                   class="text-warning" th:text="${game.name}">Game</a>
+                <a th:href="@{/games/{slug}(slug=${game.slug})}" th:text="${game.name}">Game</a>
             </li>
-            <li class="breadcrumb-item active" th:text="${boss.name}">Boss</li>
+            <li class="breadcrumb-item active" style="color:#8a7a62;" th:text="${boss.name}">Boss</li>
         </ol>
     </nav>
 
     <div class="row g-4">
 
-        <!-- Left column: info + actions + notes -->
+        <!-- Left column -->
         <div class="col-lg-6">
+
+            <!-- Boss image -->
+            <div th:if="${boss.imageUrl}"
+                 class="boss-portrait mb-4"
+                 style="height:260px;border:1px solid #4a3a2a;"
+                 th:style="'height:260px;border:1px solid #4a3a2a;background-image:url(' + ${boss.imageUrl} + ')'">
+            </div>
+            <div th:unless="${boss.imageUrl}"
+                 class="boss-portrait-placeholder mb-4"
+                 style="height:200px;border:1px solid #4a3a2a;">
+                <span class="page-title" style="font-size:1rem;text-align:center;padding:0 1rem;"
+                      th:text="${boss.name}">Boss Name</span>
+                <span class="boss-portrait-area mt-1" th:text="${boss.area}">Area</span>
+            </div>
 
             <!-- Title + status -->
             <div class="d-flex align-items-center flex-wrap gap-3 mb-2">
-                <h1 class="mb-0" th:text="${boss.name}">Boss Name</h1>
-                <span th:if="${boss.cleared}"    class="badge bg-success fs-6">Cleared</span>
-                <span th:unless="${boss.cleared}" class="badge bg-danger fs-6">Not Cleared</span>
+                <h1 class="page-title mb-0" style="font-size:1.4rem;" th:text="${boss.name}">Boss Name</h1>
+                <span th:if="${boss.cleared}"    class="badge bg-success">Cleared</span>
+                <span th:unless="${boss.cleared}" class="badge bg-danger">Not Cleared</span>
             </div>
 
-            <!-- Area -->
-            <p class="mb-3">
+            <p class="mb-4">
                 <span th:if="${boss.area}" class="badge bg-secondary" th:text="${boss.area}">Area</span>
             </p>
 
-            <!-- Stats row -->
+            <!-- Stats -->
             <div class="row g-2 mb-4">
                 <div class="col-6">
-                    <div class="card border-danger text-center py-3">
-                        <div class="fs-2 fw-bold text-danger" th:text="${boss.deathCount}">0</div>
-                        <div class="small text-muted">Deaths</div>
+                    <div class="stat-card">
+                        <div class="stat-number" th:text="${boss.deathCount}">0</div>
+                        <div class="stat-label">Deaths</div>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card border-secondary text-center py-3">
-                        <div class="fs-2 fw-bold" th:text="${attempts.size()}">0</div>
-                        <div class="small text-muted">Total Attempts</div>
+                    <div class="stat-card">
+                        <div class="stat-number" th:text="${attempts.size()}">0</div>
+                        <div class="stat-label">Total Attempts</div>
                     </div>
                 </div>
             </div>
 
             <!-- Lore -->
-            <div th:if="${boss.lore}" class="card border-secondary mb-4">
-                <div class="card-body">
-                    <h6 class="text-muted text-uppercase small mb-2">Lore</h6>
-                    <p class="fst-italic mb-0 small" th:text="${boss.lore}">Lore blurb</p>
-                </div>
+            <div th:if="${boss.lore}" class="mb-4">
+                <p class="section-title">Lore</p>
+                <p class="lore-text mb-0" th:text="${boss.lore}">Lore text</p>
             </div>
 
+            <hr class="gold-divider">
+
             <!-- Action buttons -->
-            <div class="d-flex gap-2 mb-4">
+            <div class="d-flex gap-2 flex-wrap mb-4">
                 <form th:action="@{/games/{slug}/bosses/{id}/attempt(slug=${game.slug},id=${boss.id})}"
                       method="post">
                     <input type="hidden" name="source" value="detail">
-                    <button type="submit" class="btn btn-danger">+ Log Death</button>
+                    <button type="submit" class="btn btn-danger">Log Death</button>
                 </form>
                 <form th:action="@{/games/{slug}/bosses/{id}/clear(slug=${game.slug},id=${boss.id})}"
                       method="post">
@@ -75,15 +87,21 @@
                             th:class="${boss.cleared} ? 'btn btn-outline-secondary' : 'btn btn-success'"
                             th:text="${boss.cleared} ? 'Mark Not Cleared' : 'Mark Cleared'">Clear</button>
                 </form>
+                <form th:action="@{/games/{slug}/bosses/{id}/reset(slug=${game.slug},id=${boss.id})}"
+                      method="post">
+                    <input type="hidden" name="source" value="detail">
+                    <button type="submit" class="btn btn-reset"
+                            onclick="return confirm('Reset all deaths for this boss?')">Reset Deaths</button>
+                </form>
             </div>
 
             <!-- Notes -->
-            <div class="card border-secondary">
+            <div class="card">
                 <div class="card-body">
-                    <h6 class="text-muted text-uppercase small mb-2">Notes</h6>
+                    <p class="section-title">Notes</p>
                     <form th:action="@{/games/{slug}/bosses/{id}/notes(slug=${game.slug},id=${boss.id})}"
                           method="post">
-                        <textarea class="form-control border-secondary mb-2"
+                        <textarea class="form-control mb-2"
                                   name="notes" rows="4"
                                   placeholder="e.g. tried jumping attack strat..."
                                   th:text="${boss.notes}"></textarea>
@@ -93,42 +111,42 @@
             </div>
         </div>
 
-        <!-- Right column: chart + attempt history -->
+        <!-- Right column -->
         <div class="col-lg-6">
 
-            <!-- Chart -->
-            <div class="card border-secondary mb-4">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <h6 class="text-muted text-uppercase small mb-3">Attempts Over Time</h6>
+                    <p class="section-title">Attempts Over Time</p>
                     <canvas id="attemptsChart"></canvas>
-                    <p th:if="${attempts.empty}" class="text-muted small text-center mt-3 mb-0">
+                    <p th:if="${attempts.empty}" class="small text-center mt-3 mb-0"
+                       style="color:#6a5a42;font-style:italic;">
                         No attempts yet — log a death to start tracking.
                     </p>
                 </div>
             </div>
 
-            <!-- Attempt history -->
-            <div class="card border-secondary">
+            <div class="card">
                 <div class="card-body">
-                    <h6 class="text-muted text-uppercase small mb-3">
+                    <p class="section-title">
                         Attempt History
                         <span class="badge bg-secondary ms-1" th:text="${attempts.size()}">0</span>
-                    </h6>
+                    </p>
 
-                    <p th:if="${attempts.empty}" class="text-muted small mb-0">
+                    <p th:if="${attempts.empty}" class="small mb-0"
+                       style="color:#6a5a42;font-style:italic;">
                         No attempts logged yet.
                     </p>
 
                     <ul class="list-group list-group-flush" th:unless="${attempts.empty}">
-                        <li class="list-group-item bg-transparent border-secondary d-flex justify-content-between align-items-center py-2"
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-2"
                             th:each="attempt : ${attempts}">
                             <div class="d-flex align-items-center gap-2">
-                                <span th:if="${attempt.died}"   class="badge bg-danger">Death</span>
+                                <span th:if="${attempt.died}"    class="badge bg-danger">Death</span>
                                 <span th:unless="${attempt.died}" class="badge bg-success">Survived</span>
-                                <small class="text-muted"
+                                <small style="color:#8a7a62;"
                                        th:text="${#temporals.format(attempt.attemptedAt, 'dd MMM yyyy HH:mm')}">Date</small>
                             </div>
-                            <small th:if="${attempt.notes}" class="text-muted fst-italic"
+                            <small th:if="${attempt.notes}" style="color:#8a7a62;font-style:italic;"
                                    th:text="${attempt.notes}">note</small>
                         </li>
                     </ul>
@@ -138,7 +156,6 @@
     </div>
 </main>
 
-<footer th:replace="~{layout :: footer}"></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script th:src="@{/js/charts.js}"></script>
