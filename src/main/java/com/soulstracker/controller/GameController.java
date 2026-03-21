@@ -23,11 +23,16 @@ public class GameController {
     @GetMapping("/games/{slug}")
     public String bossList(@PathVariable String slug,
                            @RequestParam(defaultValue = "all") String filter,
+                           @RequestParam(defaultValue = "") String q,
+                           @RequestParam(defaultValue = "") String area,
                            Model model) {
         var game = bossService.findGameBySlug(slug);
         model.addAttribute("game", game);
-        model.addAttribute("bosses", bossService.findBossesByGame(game, filter));
+        model.addAttribute("bosses", bossService.findBossesByGame(game, filter, q, area));
         model.addAttribute("filter", filter);
+        model.addAttribute("q", q);
+        model.addAttribute("area", area);
+        model.addAttribute("areas", bossService.findAreasByGame(game));
         return "boss-list";
     }
 }
