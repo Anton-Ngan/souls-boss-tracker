@@ -20,8 +20,6 @@ public class DashboardController {
         model.addAttribute("totalDeaths",    statsService.getTotalDeaths());
         model.addAttribute("bossesCleared",  statsService.getBossesCleared());
         model.addAttribute("gamesInProgress",statsService.getGamesInProgress());
-        model.addAttribute("longestStreak",  statsService.getLongestStreakWithoutDying());
-
         // Bar chart — top 10 bosses by deaths
         List<StatsService.BossDeathStat> topBosses = statsService.getTopBossesByDeaths(10);
         model.addAttribute("topBossLabels", topBosses.stream().map(StatsService.BossDeathStat::bossName).toList());
