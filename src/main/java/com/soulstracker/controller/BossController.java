@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @Controller
 @RequiredArgsConstructor
 public class BossController {
@@ -86,9 +89,13 @@ public class BossController {
     }
 
     private String buildListParams(String filter, String q, String area) {
-        var params = new StringBuilder("?filter=").append(filter);
-        if (q != null && !q.isBlank())    params.append("&q=").append(q);
-        if (area != null && !area.isBlank()) params.append("&area=").append(area);
+        var params = new StringBuilder("?filter=").append(encode(filter));
+        if (q != null && !q.isBlank())       params.append("&q=").append(encode(q));
+        if (area != null && !area.isBlank()) params.append("&area=").append(encode(area));
         return params.toString();
+    }
+
+    private String encode(String value) {
+        return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 }
