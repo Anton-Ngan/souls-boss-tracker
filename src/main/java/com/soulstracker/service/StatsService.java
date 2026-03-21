@@ -9,9 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.soulstracker.model.Game;
+
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -81,6 +84,34 @@ public class StatsService {
         return bossAttemptRepository.findTop10ByOrderByAttemptedAtDesc();
     }
 
+    public long getTotalDeathsForGame(Game game) {
+        return bossRepository.findByGame(game).stream()
+                .mapToLong(b -> bossAttemptRepository.countByBossAndDiedTrue(b))
+                .sum();
+    }
+
+    public long getBossesClearedForGame(Game game) {
+        return bossRepository.findByGame(game).stream()
+                .filter(Boss::isCleared)
+                .count();
+    }
+
+    public List<AreaDeathStat> getDeathsByArea(Game game) {
+        return bossRepository.findByGame(game).stream()
+                .filter(b -> b.getArea() != null && !b.getArea().isBlank())
+                .collect(Collectors.groupingBy(Boss::getArea,
+                        Collectors.summingLong(b -> bossAttemptRepository.countByBossAndDiedTrue(b))))
+                .entrySet().stream()
+                .filter(e -> e.getValue() > 0)
+                .map(e -> new AreaDeathStat(e.getKey(), e.getValue()))
+                .sorted(Comparator.comparingLong(AreaDeathStat::deaths).reversed())
+                .toList();
+    }
+
+    public List<BossAttempt> getRecentActivityForGame(Game game) {
+        return bossAttemptRepository.findTop10ByBossGameOrderByAttemptedAtDesc(game);
+    }
+
     public List<LeaderboardRow> getLeaderboard(String sort, String dir) {
         List<LeaderboardRow> rows = bossRepository.findAll().stream()
                 .map(b -> new LeaderboardRow(
@@ -90,7 +121,8 @@ public class StatsService {
                         b.getId(),
                         bossAttemptRepository.countByBossAndDiedTrue(b),
                         b.isCleared(),
-                        b.getClearedAt()))
+                        b.getClearedAt(),
+                        b.getArea()))
                 .toList();
 
         Comparator<LeaderboardRow> comparator = switch (sort) {
@@ -109,7 +141,8 @@ public class StatsService {
 
     public record BossDeathStat(String bossName, String gameName, long deaths) {}
     public record GameCompletionStat(String gameName, long cleared, int total) {}
+    public record AreaDeathStat(String area, long deaths) {}
     public record LeaderboardRow(
             String bossName, String gameName, String gameSlug, Long bossId,
-            long deaths, boolean cleared, LocalDateTime clearedAt) {}
+            long deaths, boolean cleared, LocalDateTime clearedAt, String bossArea) {}
 }

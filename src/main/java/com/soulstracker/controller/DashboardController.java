@@ -1,10 +1,13 @@
 package com.soulstracker.controller;
 
+import com.soulstracker.model.Game;
+import com.soulstracker.service.BossService;
 import com.soulstracker.service.StatsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -13,9 +16,10 @@ import java.util.List;
 public class DashboardController {
 
     private final StatsService statsService;
+    private final BossService bossService;
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model) {
+    public String dashboard(@RequestParam(required = false) String game, Model model) {
         // Stat cards
         model.addAttribute("totalDeaths",    statsService.getTotalDeaths());
         model.addAttribute("bossesCleared",  statsService.getBossesCleared());
@@ -33,8 +37,23 @@ public class DashboardController {
         model.addAttribute("gameCleared", completion.stream().map(StatsService.GameCompletionStat::cleared).toList());
         model.addAttribute("gameTotal",   completion.stream().map(StatsService.GameCompletionStat::total).toList());
 
-        // Recent activity feed
-        model.addAttribute("recentActivity", statsService.getRecentActivity());
+        // Game filter
+        model.addAttribute("games", bossService.findAllGames());
+        model.addAttribute("selectedGame", game);
+
+        Game selectedGameObj = null;
+        if (game != null && !game.isBlank()) {
+            try { selectedGameObj = bossService.findGameBySlug(game); } catch (Exception ignored) {}
+        }
+
+        if (selectedGameObj != null) {
+            model.addAttribute("gameDeaths",        statsService.getTotalDeathsForGame(selectedGameObj));
+            model.addAttribute("gameBossesCleared", statsService.getBossesClearedForGame(selectedGameObj));
+            model.addAttribute("deathsByArea",      statsService.getDeathsByArea(selectedGameObj));
+            model.addAttribute("recentActivity",    statsService.getRecentActivityForGame(selectedGameObj));
+        } else {
+            model.addAttribute("recentActivity", statsService.getRecentActivity());
+        }
 
         return "dashboard";
     }
