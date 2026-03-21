@@ -91,11 +91,17 @@
                         <form th:action="@{/games/{slug}/bosses/{id}/attempt(slug=${game.slug},id=${boss.id})}"
                               method="post" style="flex:1;">
                             <input type="hidden" name="source" value="list">
+                            <input type="hidden" name="filter" th:value="${filter}">
+                            <input type="hidden" name="q"      th:value="${q}">
+                            <input type="hidden" name="area"   th:value="${area}">
                             <button type="submit" class="btn btn-danger btn-sm w-100">Log Death</button>
                         </form>
                         <form th:action="@{/games/{slug}/bosses/{id}/clear(slug=${game.slug},id=${boss.id})}"
                               method="post">
                             <input type="hidden" name="source" value="list">
+                            <input type="hidden" name="filter" th:value="${filter}">
+                            <input type="hidden" name="q"      th:value="${q}">
+                            <input type="hidden" name="area"   th:value="${area}">
                             <button type="submit"
                                     th:class="${boss.cleared} ? 'btn btn-outline-secondary btn-sm' : 'btn btn-outline-success btn-sm'"
                                     th:text="${boss.cleared} ? 'Uncleared' : 'Cleared'">Cleared</button>
@@ -103,6 +109,9 @@
                         <form th:action="@{/games/{slug}/bosses/{id}/reset(slug=${game.slug},id=${boss.id})}"
                               method="post">
                             <input type="hidden" name="source" value="list">
+                            <input type="hidden" name="filter" th:value="${filter}">
+                            <input type="hidden" name="q"      th:value="${q}">
+                            <input type="hidden" name="area"   th:value="${area}">
                             <button type="submit" class="btn btn-reset btn-sm"
                                     onclick="return confirm('Reset all deaths for this boss?')">Reset</button>
                         </form>

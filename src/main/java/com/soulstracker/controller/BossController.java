@@ -37,23 +37,29 @@ public class BossController {
     @PostMapping("/games/{slug}/bosses/{id}/attempt")
     public String logAttempt(@PathVariable String slug,
                              @PathVariable Long id,
-                             @RequestParam(defaultValue = "list") String source) {
+                             @RequestParam(defaultValue = "list") String source,
+                             @RequestParam(defaultValue = "all") String filter,
+                             @RequestParam(defaultValue = "") String q,
+                             @RequestParam(defaultValue = "") String area) {
         var boss = bossService.findBossById(id);
         bossService.logDeath(boss);
         return "detail".equals(source)
                 ? "redirect:/games/" + slug + "/bosses/" + id
-                : "redirect:/games/" + slug;
+                : "redirect:/games/" + slug + buildListParams(filter, q, area);
     }
 
     @PostMapping("/games/{slug}/bosses/{id}/clear")
     public String toggleCleared(@PathVariable String slug,
                                 @PathVariable Long id,
-                                @RequestParam(defaultValue = "list") String source) {
+                                @RequestParam(defaultValue = "list") String source,
+                                @RequestParam(defaultValue = "all") String filter,
+                                @RequestParam(defaultValue = "") String q,
+                                @RequestParam(defaultValue = "") String area) {
         var boss = bossService.findBossById(id);
         bossService.toggleCleared(boss);
         return "detail".equals(source)
                 ? "redirect:/games/" + slug + "/bosses/" + id
-                : "redirect:/games/" + slug;
+                : "redirect:/games/" + slug + buildListParams(filter, q, area);
     }
 
     @PostMapping("/games/{slug}/bosses/{id}/notes")
@@ -68,11 +74,21 @@ public class BossController {
     @PostMapping("/games/{slug}/bosses/{id}/reset")
     public String resetDeaths(@PathVariable String slug,
                               @PathVariable Long id,
-                              @RequestParam(defaultValue = "list") String source) {
+                              @RequestParam(defaultValue = "list") String source,
+                              @RequestParam(defaultValue = "all") String filter,
+                              @RequestParam(defaultValue = "") String q,
+                              @RequestParam(defaultValue = "") String area) {
         var boss = bossService.findBossById(id);
         bossService.resetDeaths(boss);
         return "detail".equals(source)
                 ? "redirect:/games/" + slug + "/bosses/" + id
-                : "redirect:/games/" + slug;
+                : "redirect:/games/" + slug + buildListParams(filter, q, area);
+    }
+
+    private String buildListParams(String filter, String q, String area) {
+        var params = new StringBuilder("?filter=").append(filter);
+        if (q != null && !q.isBlank())    params.append("&q=").append(q);
+        if (area != null && !area.isBlank()) params.append("&area=").append(area);
+        return params.toString();
     }
 }
